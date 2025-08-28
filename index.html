@@ -1,18 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>On Visibility</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <style>
-    body { background-color: #0a0a0a; color: #f3f4f6; }
-    .navbar { transition: all 0.3s ease; }
-    .navbar.scrolled { background-color: rgba(0,0,0,0.85); backdrop-filter: blur(10px); }
 
-    /* Logo */
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- AOS Animate On Scroll -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      position: relative;
+      padding-bottom: 100px; /* espaço para o footer */
+    }
+
+    /* Animação gradiente */
+    .gradient-animated {
+      background: linear-gradient(135deg, #7e22ce, #ec4899, #7e22ce);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navbar efeito */
+    .navbar {
+      background-color: rgba(0,0,0,0.7);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar.scrolled {
+      background-color: rgba(0,0,0,0.95);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    /* Botão WhatsApp fixo */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #25d366;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      background-clip: padding-box;
+      z-index: 1000;
+      transition: transform 0.2s ease-in-out;
+      animation: pulse 2s infinite;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.2);
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        box-shadow: none;
+      }
+    }
+
+    /* Ajuste altura completa para mobile */
+    .full-vh {
+      min-height: 100vh; /* fallback para desktop */
+    }
+
+    /* Logo Visibility animado */
     #logo-visibility {
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
@@ -20,64 +98,99 @@
       opacity: 0;
       transform: translateX(20px);
     }
-    #logo-box {
-      transition: width 0.3s ease, height 0.3s ease;
-    }
-    .shrink-box {
-      width: 90px;
-      height: 60px;
-    }
 
-    .whatsapp-float {
-      position: fixed; bottom: 20px; right: 20px; background: #25d366;
-      color: #fff; border-radius: 50%; padding: 16px; font-size: 28px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 999; transition: transform 0.3s ease;
+    /* 🔥 Caixa do logo animando junto */
+    header svg rect {
+      transition: x 0.45s cubic-bezier(0.68,-0.55,0.27,1.55),
+                  width 0.45s cubic-bezier(0.68,-0.55,0.27,1.55);
     }
-    .whatsapp-float:hover { transform: scale(1.1); }
-    .full-vh { min-height: 100vh; }
   </style>
 </head>
-<body class="font-sans">
+<body class="bg-black text-gray-200 font-sans">
 
-<!-- Navbar -->
-<header class="fixed top-0 left-0 w-full z-50 navbar">
-  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
-    <a href="#" aria-label="On Visibility" class="flex items-center">
-      <svg id="logo-svg" width="220" height="60" viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="onv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#7C3AED"/>
-            <stop offset="100%" stop-color="#EC4899"/>
-          </linearGradient>
-        </defs>
-        <!-- Caixa -->
-        <rect id="logo-box" x="10" y="20" width="200" height="70" rx="14" fill="none" stroke="url(#onv-grad)" stroke-width="4"/>
-        <!-- ON -->
-        <text id="logo-on" x="45" y="65" text-anchor="middle" font-size="32" font-weight="700" fill="url(#onv-grad)">ON</text>
-        <!-- Visibility -->
-        <text id="logo-visibility" x="140" y="65" text-anchor="start" font-size="32" font-weight="700" fill="url(#onv-grad)">Visibility</text>
-      </svg>
-    </a>
-    <nav class="space-x-6 hidden md:flex">
-      <a href="#Sobre" class="hover:text-purple-400">Sobre</a>
-      <a href="#Servicos" class="hover:text-purple-400">Serviços</a>
-      <a href="#Contato" class="hover:text-purple-400">Contato</a>
+  <!-- Navbar -->
+  <header class="fixed w-full top-0 z-50 navbar">
+    <nav class="flex justify-between items-center px-6 md:px-20 py-4 text-white">
+      <!-- LOGO -->
+      <a href="#" aria-label="On Visibility" class="flex items-center">
+        <svg width="220" height="60" viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="onv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7C3AED"/>
+              <stop offset="100%" stop-color="#EC4899"/>
+            </linearGradient>
+          </defs>
+          <rect x="10" y="20" width="200" height="70" rx="14" fill="none" stroke="url(#onv-grad)" stroke-width="4"/>
+          <text id="logo-on" x="45" y="65" text-anchor="middle" font-size="32" font-weight="700" fill="url(#onv-grad)">ON</text>
+          <text id="logo-visibility" x="140" y="65" text-anchor="start" font-size="32" font-weight="700" fill="url(#onv-grad)">Visibility</text>
+        </svg>
+      </a>
+      <ul class="hidden md:flex gap-6">
+        <li><a href="#sobre" class="hover:text-pink-400">Sobre</a></li>
+        <li><a href="#servicos" class="hover:text-pink-400">Serviços</a></li>
+        <li><a href="#espaco" class="hover:text-pink-400">Espaço</a></li>
+        <li><a href="#depoimentos" class="hover:text-pink-400">Depoimentos</a></li>
+      </ul>
     </nav>
-  </div>
-</header>
+  </header>
 
-<!-- Hero -->
-<section class="flex items-center justify-center text-center full-vh px-6" data-aos="fade-up">
-  <div>
-    <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">Transforme seu Negócio no Digital</h1>
-    <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">Da loja física para a presença digital em páginas OnePage modernas e objetivas, que aumentam sua visibilidade nas redes.</p>
+  <!-- Hero -->
+  <section class="full-vh gradient-animated flex flex-col justify-center items-center text-white text-center" data-aos="fade-up">
+    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg">On Visibility</h1>
+    <p class="mt-4 text-xl md:text-2xl">Transformamos seu negócio em presença digital de impacto, aumentando sua visibilidade e resultados.</p>
+    <a href="#sobre" class="mt-8 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg hover:bg-gray-800 transition">Saiba Mais</a>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="py-20 px-6 md:px-20" data-aos="fade-right">
+    <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Sobre Nós</h2>
+    <p class="max-w-3xl mx-auto text-center text-gray-300">Na On Visibility, ajudamos empresas e negócios a conquistarem presença digital de forma profissional e acessível.
+Criamos sites One Page modernos, rápidos e adaptados à identidade visual de cada cliente. Nossa missão é transformar sua ideia em um site que realmente gere resultados.</p>
+  </section>
+
+  <!-- Serviços -->
+  <section id="servicos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
+    <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">Nossos Serviços</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in">
+        <h3 class="text-xl font-semibold mb-3 text-purple-300">Criação de Sites One Page</h3>
+        <p class="text-gray-400">Desenvolvemos sites modernos e objetivos, perfeitos para destacar sua empresa em uma única página clara e atrativa. Design responsivo e adaptado à sua identidade visual.</p>
+      </div>
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+        <h3 class="text-xl font-semibold mb-3 text-purple-300">Personalização para Negócios</h3>
+        <p class="text-gray-400">Cada site é feito sob medida para o seu negócio, com cores, estilos e conteúdos que refletem a essência da sua marca. Você recebe um site único, não um modelo pronto.</p>
+      </div>
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="400">
+        <h3 class="text-xl font-semibold mb-3 text-purple-300">Otimização e Resultados</h3>
+        <p class="text-gray-400">Aplicamos técnicas de SEO básico e design estratégico para que seu site carregue rápido, apareça bem no Google e ajude você a conquistar novos clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nosso Espaço -->
+ <section id="OndeAtuamos" class="py-20 px-6 md:px-20" data-aos="fade-left">
+  <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Onde Atuamos</h2>
+  <div class="max-w-3xl mx-auto bg-gray-800 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition" data-aos="zoom-in">
+    <h3 class="text-2xl font-semibold mb-4 text-center">Atendimento 100% Online</h3>
+    <p class="text-center text-lg">
+     Atendemos empresas de todo o Brasil 
+    </p>
   </div>
 </section>
 
-<!-- Conteúdo exemplo -->
-<section id="Sobre" class="py-20 px-6 md:px-20" data-aos="fade-up">
-  <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Sobre Nós</h2>
-  <p class="max-w-3xl mx-auto text-gray-300 text-center">Na On Visibility, ajudamos empresas a terem destaque online com páginas OnePage práticas, claras e objetivas, que mostram exatamente o que o cliente precisa saber para confiar em você e no seu negócio.</p>
+  <!-- Depoimentos -->
+  <section id="depoimentos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
+    <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">O que dizem nossos clientes</h2>
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-left">
+        <p class="italic text-gray-300">"Excelente atendimento, recomendo muito!"</p>
+        <footer class="mt-4 text-sm text-gray-500">–</footer>
+      </blockquote>
+      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-right" data-aos-delay="200">
+        <p class="italic text-gray-300">"Serviço de qualidade e profissionalismo!"</p>
+      <footer class="mt-4 text-sm text-gray-500">– </footer>
+    </blockquote>
+  </div>
 </section>
 
 <!-- Rodapé -->
@@ -85,47 +198,93 @@
   <p>&copy; 2025 On Visibility - Todos os direitos reservados</p>
 </footer>
 
-<!-- Botão WhatsApp -->
+<!-- Botão WhatsApp fixo lateral direita -->
 <a href="https://wa.me/5511940122433" target="_blank" class="whatsapp-float">
   <i class="fa-brands fa-whatsapp"></i>
 </a>
 
-<!-- Script Logo -->
+<!-- Script Navbar Scroll -->
 <script>
-  window.addEventListener("scroll", function() {
+  (function () {
     const nav = document.querySelector(".navbar");
-    const visibilityText = document.getElementById("logo-visibility");
-    const logoBox = document.getElementById("logo-box");
+    const svg = document.querySelector("header svg");
+    if (!svg) return;
 
-    if (window.scrollY > 50) {
-      nav.classList.add("scrolled");
-      visibilityText.classList.add("hidden-visibility");
-      logoBox.classList.add("shrink-box");
-    } else {
-      nav.classList.remove("scrolled");
-      visibilityText.classList.remove("hidden-visibility");
-      logoBox.classList.remove("shrink-box");
+    const rect = svg.querySelector("rect");
+    const onText = document.getElementById("logo-on");
+    const visText = document.getElementById("logo-visibility");
+
+    let full = null;
+    let onlyOn = null;
+
+    const padFull = 16;
+    const padOn   = 10;
+
+    function computeBoxes() {
+      if (!rect || !onText || !visText) return;
+      const onBox  = onText.getBBox();
+      const visBox = visText.getBBox();
+
+      const minX = Math.min(onBox.x, visBox.x);
+      const maxX = Math.max(onBox.x + onBox.width, visBox.x + visBox.width);
+      full = { x: Math.round(minX - padFull), width: Math.round((maxX - minX) + padFull * 2) };
+      onlyOn = { x: Math.round(onBox.x - padOn), width: Math.round(onBox.width + padOn * 2) };
+
+      rect.setAttribute("x", full.x);
+      rect.setAttribute("width", full.width);
     }
+
+    function applyStateByScroll() {
+      if (window.scrollY > 50) {
+        nav.classList.add("scrolled");
+        visText.classList.add("hidden-visibility");
+        if (onlyOn) {
+          rect.setAttribute("x", onlyOn.x);
+          rect.setAttribute("width", onlyOn.width);
+        }
+      } else {
+        nav.classList.remove("scrolled");
+        visText.classList.remove("hidden-visibility");
+        if (full) {
+          rect.setAttribute("x", full.x);
+          rect.setAttribute("width", full.width);
+        }
+      }
+    }
+
+    window.addEventListener("load", () => {
+      computeBoxes();
+      applyStateByScroll();
+    });
+
+    window.addEventListener("resize", () => {
+      computeBoxes();
+      applyStateByScroll();
+    });
+
+    window.addEventListener("scroll", applyStateByScroll);
+  })();
+</script>
+
+<!-- AOS Script -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true
   });
 </script>
 
-<!-- AOS -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>AOS.init({ duration: 1000, once: true });</script>
-
-<!-- Ajuste mobile full height -->
 <script>
+  // Ajuste altura do Hero para mobile
   function ajustarAlturaHero() {
     const hero = document.querySelector('.full-vh');
     if(hero){
-      const vh = window.innerHeight * 0.01;
-      hero.style.setProperty('--vh', `${vh}px`);
-      hero.style.height = `calc(var(--vh, 1vh) * 100)`;
+      hero.style.height = window.innerHeight + 'px';
     }
   }
   window.addEventListener('load', ajustarAlturaHero);
   window.addEventListener('resize', ajustarAlturaHero);
-  window.addEventListener('orientationchange', ajustarAlturaHero);
 </script>
 
 </body>
