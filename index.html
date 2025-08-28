@@ -210,5 +210,21 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
       once: true
     });
   </script>
+<script>
+  function ajustarAlturaHero() {
+    const hero = document.querySelector('.full-vh');
+    if(hero){
+      hero.style.height = window.innerHeight + 'px';
+    }
+  }
+
+  // Ajusta na carga da página
+  window.addEventListener('load', ajustarAlturaHero);
+
+  // Ajusta quando a tela muda de tamanho ou rola (mobile)
+  window.addEventListener('resize', ajustarAlturaHero);
+</script>
+
 </body>
 </html>
+
