@@ -10,10 +10,12 @@
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    integrity="sha512-papYv+N6EoYQyJeHx8XJ+RCEp4vQ6PnZ0I6FhlQwqkFmzC43nXcJgwKchcUBIPoC5S5vsYH2hC6PcqB+XxY6bw=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+
+  <!-- AOS Animate On Scroll -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
     html {
@@ -48,7 +50,7 @@
       width: 60px;
       height: 60px;
       bottom: 20px;
-      right: 20px;
+      left: 20px; /* Mudado para o lado esquerdo */
       background-color: #25d366;
       color: #fff;
       border-radius: 50%;
@@ -65,9 +67,6 @@
     .whatsapp-float:hover {
       transform: scale(1.2);
     }
-    .whatsapp-float i {
-      line-height: 0;
-    }
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.1); }
@@ -80,7 +79,7 @@
   <!-- Navbar -->
   <header class="fixed w-full top-0 z-50 navbar">
     <nav class="flex justify-between items-center px-6 md:px-20 py-4 text-white">
-      <!-- LOGO SVG -->
+      <!-- LOGO -->
       <a href="#" aria-label="On Visibility" class="flex items-center">
         <svg width="180" height="60" viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -104,31 +103,31 @@
   </header>
 
   <!-- Hero -->
-  <section class="h-screen gradient-animated flex flex-col justify-center items-center text-white text-center">
+  <section class="h-screen gradient-animated flex flex-col justify-center items-center text-white text-center" data-aos="fade-up">
     <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg">Ryan Henrique dos Santos</h1>
     <p class="mt-4 text-xl md:text-2xl">Slogan ou descrição curta</p>
     <a href="#sobre" class="mt-8 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg hover:bg-gray-800 transition">Saiba Mais</a>
   </section>
 
   <!-- Sobre -->
-  <section id="sobre" class="py-20 px-6 md:px-20">
+  <section id="sobre" class="py-20 px-6 md:px-20" data-aos="fade-right">
     <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Sobre Nós</h2>
     <p class="max-w-3xl mx-auto text-center text-gray-300">Aqui vai uma breve apresentação do profissional ou negócio, destacando a história, missão e valores.</p>
   </section>
 
   <!-- Serviços -->
-  <section id="servicos" class="py-20 px-6 md:px-20 bg-gray-900">
+  <section id="servicos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
     <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">Nossos Serviços</h2>
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="p-6 bg-black rounded-2xl shadow-lg hover:shadow-pink-500/40 transition transform hover:-translate-y-2">
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in">
         <h3 class="text-xl font-semibold mb-3 text-purple-300">Serviço 1</h3>
         <p class="text-gray-400">Descrição breve do serviço oferecido.</p>
       </div>
-      <div class="p-6 bg-black rounded-2xl shadow-lg hover:shadow-pink-500/40 transition transform hover:-translate-y-2">
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="200">
         <h3 class="text-xl font-semibold mb-3 text-purple-300">Serviço 2</h3>
         <p class="text-gray-400">Descrição breve do serviço oferecido.</p>
       </div>
-      <div class="p-6 bg-black rounded-2xl shadow-lg hover:shadow-pink-500/40 transition transform hover:-translate-y-2">
+      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="400">
         <h3 class="text-xl font-semibold mb-3 text-purple-300">Serviço 3</h3>
         <p class="text-gray-400">Descrição breve do serviço oferecido.</p>
       </div>
@@ -136,24 +135,24 @@
   </section>
 
   <!-- Nosso Espaço -->
-  <section id="espaco" class="py-20 px-6 md:px-20">
+  <section id="espaco" class="py-20 px-6 md:px-20" data-aos="fade-left">
     <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Nosso Espaço</h2>
     <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 1">
-      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 2">
-      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 3">
+      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 1" data-aos="zoom-in">
+      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 2" data-aos="zoom-in" data-aos-delay="200">
+      <img src="https://via.placeholder.com/400" class="rounded-xl shadow-lg hover:scale-105 transition" alt="Espaço 3" data-aos="zoom-in" data-aos-delay="400">
     </div>
   </section>
 
   <!-- Depoimentos -->
-  <section id="depoimentos" class="py-20 px-6 md:px-20 bg-gray-900">
+  <section id="depoimentos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
     <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">O que dizem nossos clientes</h2>
     <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <blockquote class="p-6 bg-black rounded-xl shadow-lg">
-        <p class="italic text-gray-300">"Excelente atendimento, recomendo muio!"</p>
+      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-left">
+        <p class="italic text-gray-300">"Excelente atendimento, recomendo muito!"</p>
         <footer class="mt-4 text-sm text-gray-500">– Cliente A</footer>
       </blockquote>
-      <blockquote class="p-6 bg-black rounded-xl shadow-lg">
+      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-right" data-aos-delay="200">
         <p class="italic text-gray-300">"Serviço de qualidade e profissionalismo!"</p>
         <footer class="mt-4 text-sm text-gray-500">– Cliente B</footer>
       </blockquote>
@@ -161,16 +160,13 @@
   </section>
 
   <!-- Rodapé -->
-  <footer class="py-6 text-center bg-black border-t border-gray-800 text-gray-500">
+  <footer class="py-6 text-center bg-black border-t border-gray-800 text-gray-500" data-aos="fade-in">
     <p>&copy; 2025 On Visibility - Todos os direitos reservados</p>
   </footer>
 
-  <!-- Botão WhatsApp com Tooltip -->
+  <!-- Botão WhatsApp -->
   <a href="https://wa.me/5599999999999" target="_blank" class="whatsapp-float group relative">
     <i class="fa-brands fa-whatsapp"></i>
-    <span class="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-black text-white text-sm rounded py-1 px-2 whitespace-nowrap transition-opacity">
-      Fale conosco
-    </span>
   </a>
 
   <!-- Script Navbar Scroll -->
@@ -182,6 +178,15 @@
       } else {
         nav.classList.remove("scrolled");
       }
+    });
+  </script>
+
+  <!-- AOS Script -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
     });
   </script>
 </body>
