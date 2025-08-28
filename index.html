@@ -64,8 +64,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2); /* sombra suavizada */
-      background-clip: padding-box; /* evita linha preta */
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      background-clip: padding-box;
       z-index: 1000;
       transition: transform 0.2s ease-in-out;
       animation: pulse 2s infinite;
@@ -87,7 +87,7 @@
 
     /* Ajuste altura completa para mobile */
     .full-vh {
-      height: 100dvh; /* corrige altura do viewport em smartphones */
+      min-height: 100vh; /* fallback para desktop */
     }
 
   </style>
@@ -121,7 +121,7 @@
   </header>
 
   <!-- Hero -->
-  <section class="min-h-screen full-vh gradient-animated flex flex-col justify-center items-center text-white text-center" data-aos="fade-up">
+  <section class="full-vh gradient-animated flex flex-col justify-center items-center text-white text-center" data-aos="fade-up">
     <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg">On Visibility</h1>
     <p class="mt-4 text-xl md:text-2xl">Transformamos seu negócio em presença digital de impacto, aumentando sua visibilidade e resultados.</p>
     <a href="#sobre" class="mt-8 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg hover:bg-gray-800 transition">Saiba Mais</a>
@@ -210,21 +210,21 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
       once: true
     });
   </script>
-<script>
-  function ajustarAlturaHero() {
-    const hero = document.querySelector('.full-vh');
-    if(hero){
-      hero.style.height = window.innerHeight + 'px';
+
+  <!-- Ajuste altura dinâmica do Hero -->
+  <script>
+    function ajustarAlturaHero() {
+      const hero = document.querySelector('.full-vh');
+      if(hero){
+        const vh = window.innerHeight * 0.01;
+        hero.style.setProperty('--vh', `${vh}px`);
+        hero.style.height = `calc(var(--vh, 1vh) * 100)`;
+      }
     }
-  }
-
-  // Ajusta na carga da página
-  window.addEventListener('load', ajustarAlturaHero);
-
-  // Ajusta quando a tela muda de tamanho ou rola (mobile)
-  window.addEventListener('resize', ajustarAlturaHero);
-</script>
+    window.addEventListener('load', ajustarAlturaHero);
+    window.addEventListener('resize', ajustarAlturaHero);
+    window.addEventListener('orientationchange', ajustarAlturaHero);
+  </script>
 
 </body>
 </html>
-
