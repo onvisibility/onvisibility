@@ -18,9 +18,7 @@
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
@@ -64,36 +62,28 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2); /* sombra suavizada */
-      background-clip: padding-box; /* evita linha preta */
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      background-clip: padding-box;
       z-index: 1000;
       transition: transform 0.2s ease-in-out;
       animation: pulse 2s infinite;
     }
-    .whatsapp-float:hover {
-      transform: scale(1.2);
-    }
+    .whatsapp-float:hover { transform: scale(1.2); }
 
     @keyframes pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.2); }
     }
 
-    @media (max-width: 768px) {
-      .whatsapp-float {
-        box-shadow: none;
-      }
-    }
+    @media (max-width: 768px) { .whatsapp-float { box-shadow: none; } }
 
     /* Ajuste altura completa para mobile */
-    .full-vh {
-      min-height: 100vh; /* fallback desktop */
-    }
+    .full-vh { min-height: 100vh; }
 
     /* ====== Logo: animação ====== */
     #logo-visibility { transition: opacity .28s ease, transform .28s ease; }
     .logo-hide { opacity: 0; transform: translateX(12px); }
-    #logo-box { transition: width .28s ease; } /* anima encolher/expandir */
+    #logo-box { transition: width .28s ease; } 
   </style>
 </head>
 <body class="bg-black text-gray-200 font-sans">
@@ -110,11 +100,8 @@
               <stop offset="100%" stop-color="#EC4899"/>
             </linearGradient>
           </defs>
-          <!-- A caixa começa padrão; o JS abaixo ajusta para CABER ON+Visibility no topo -->
           <rect id="logo-box" x="10" y="20" width="200" height="70" rx="14" fill="none" stroke="url(#onv-grad)" stroke-width="4"/>
-          <!-- ON -->
           <text id="logo-on" x="45" y="65" text-anchor="middle" font-size="32" font-weight="700" fill="url(#onv-grad)">ON</text>
-          <!-- Visibility (fica dentro da caixa no topo; some no scroll) -->
           <text id="logo-visibility" x="140" y="65" text-anchor="start" font-size="32" font-weight="700" fill="url(#onv-grad)">Visibility</text>
         </svg>
       </a>
@@ -137,8 +124,10 @@
   <!-- Sobre -->
   <section id="sobre" class="py-20 px-6 md:px-20" data-aos="fade-right">
     <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Sobre Nós</h2>
-    <p class="max-w-3xl mx-auto text-center text-gray-300">Na On Visibility, ajudamos empresas e negócios a conquistarem presença digital de forma profissional e acessível.
-Criamos sites One Page modernos, rápidos e adaptados à identidade visual de cada cliente. Nossa missão é transformar sua ideia em um site que realmente gere resultados.</p>
+    <p class="max-w-3xl mx-auto text-center text-gray-300">
+      Na On Visibility, ajudamos empresas e negócios a conquistarem presença digital de forma profissional e acessível.
+      Criamos sites One Page modernos, rápidos e adaptados à identidade visual de cada cliente. Nossa missão é transformar sua ideia em um site que realmente gere resultados.
+    </p>
   </section>
 
   <!-- Serviços -->
@@ -161,17 +150,13 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
   </section>
 
   <!-- Nosso Espaço -->
- <section id="OndeAtuamos" class="py-20 px-6 md:px-20" data-aos="fade-left">
-  <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Onde Atuamos</h2>
-  
-  <!-- Caixa única de texto -->
-  <div class="max-w-3xl mx-auto bg-gray-800 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition" data-aos="zoom-in">
-    <h3 class="text-2xl font-semibold mb-4 text-center">Atendimento 100% Online</h3>
-    <p class="text-center text-lg">
-     Atendemos empresas de todo o Brasil 
-    </p>
-  </div>
-</section>
+  <section id="OndeAtuamos" class="py-20 px-6 md:px-20" data-aos="fade-left">
+    <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Onde Atuamos</h2>
+    <div class="max-w-3xl mx-auto bg-gray-800 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition" data-aos="zoom-in">
+      <h3 class="text-2xl font-semibold mb-4 text-center">Atendimento 100% Online</h3>
+      <p class="text-center text-lg">Atendemos empresas de todo o Brasil</p>
+    </div>
+  </section>
 
   <!-- Depoimentos -->
   <section id="depoimentos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
@@ -183,7 +168,7 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
       </blockquote>
       <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-right" data-aos-delay="200">
         <p class="italic text-gray-300">"Serviço de qualidade e profissionalismo!"</p>
-        <footer class="mt-4 text-sm text-gray-500">– </footer>
+        <footer class="mt-4 text-sm text-gray-500">–</footer>
       </blockquote>
     </div>
   </section>
@@ -213,19 +198,14 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
   <!-- AOS Script -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    AOS.init({ duration: 1000, once: true });
   </script>
 
-  <!-- Ajuste altura do Hero para mobile (mantido) -->
+  <!-- Ajuste altura do Hero para mobile -->
   <script>
     function ajustarAlturaHero() {
       const hero = document.querySelector('.full-vh');
-      if(hero){
-        hero.style.height = window.innerHeight + 'px';
-      }
+      if(hero) hero.style.height = window.innerHeight + 'px';
     }
     window.addEventListener('load', ajustarAlturaHero);
     window.addEventListener('resize', ajustarAlturaHero);
@@ -237,42 +217,46 @@ Criamos sites One Page modernos, rápidos e adaptados à identidade visual de ca
       const rect = document.getElementById('logo-box');
       const onText = document.getElementById('logo-on');
       const visText = document.getElementById('logo-visibility');
-      if(!rect || !onText || !visText) return;
+      if (!rect || !onText || !visText) return;
 
-      // calcula largura p/ caber ON+Visibility mantendo a borda esquerda fixa (x do rect)
       function calcWidths() {
-        const leftX = parseFloat(rect.getAttribute('x')) || 0; // mantém x fixo (10)
-        const padRight = 20; // folga do lado direito
+        const leftX = parseFloat(rect.getAttribute('x')) || 0;
+        const padRight = 20;
+        const onBB = onText.getBBox();
 
-        const onBB  = onText.getBBox();
+        // distância entre ON e Visibility
+        const spacing = 10;
+        visText.setAttribute('x', onBB.x + onBB.width + spacing);
+
         const visBB = visText.getBBox();
+        const rightAll = visBB.x + visBB.width + padRight;
+        const rightOnly = onBB.x + onBB.width + padRight;
 
-        const rightAll  = Math.max(onBB.x + onBB.width, visBB.x + visBB.width) + padRight;
-        const rightOnly = (onBB.x + onBB.width) + padRight;
+        const fullWidth = rightAll - leftX;
+        const smallWidth = rightOnly - leftX;
 
-        const fullWidth  = rightAll  - leftX;  // cobre ON + Visibility
-        const smallWidth = rightOnly - leftX;  // cobre só ON
-
-        rect.setAttribute('width', fullWidth); // garante que no topo já caiba tudo
-        rect.dataset.full  = fullWidth;
+        rect.setAttribute('width', fullWidth);
+        rect.dataset.full = fullWidth;
         rect.dataset.small = smallWidth;
       }
 
       function applyState() {
-        const full  = parseFloat(rect.dataset.full);
+        const full = parseFloat(rect.dataset.full);
         const small = parseFloat(rect.dataset.small);
         if (isNaN(full) || isNaN(small)) return;
 
         if (window.scrollY > 50) {
-          visText.classList.add('logo-hide');      // esconde "Visibility"
-          rect.setAttribute('width', small);       // encolhe caixa para o "ON"
+          visText.classList.add('logo-hide');
+          rect.setAttribute('width', small);
         } else {
-          visText.classList.remove('logo-hide');   // mostra "Visibility"
-          rect.setAttribute('width', full);        // expande caixa para ON+Visibility
+          visText.classList.remove('logo-hide');
+          rect.setAttribute('width', full);
         }
       }
 
-      window.addEventListener('load',  () => { calcWidths(); applyState(); });
+      calcWidths();
+      applyState();
+
       window.addEventListener('resize', () => { calcWidths(); applyState(); });
       window.addEventListener('scroll', applyState);
     })();
