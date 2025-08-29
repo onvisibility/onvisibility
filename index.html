@@ -3,237 +3,125 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On Visibility</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-
-  <!-- AOS Animate On Scroll -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
+  <title>OnVisibility</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
     }
 
-    body {
-      min-height: 100vh;
-      position: relative;
-      padding-bottom: 100px; /* espaço para o footer */
-    }
-
-    /* Animação gradiente */
-    .gradient-animated {
-      background: linear-gradient(135deg, #7e22ce, #ec4899, #7e22ce);
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Navbar efeito */
-    .navbar {
-      background-color: rgba(0,0,0,0.7);
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .navbar.scrolled {
-      background-color: rgba(0,0,0,0.95);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-    }
-
-    /* Botão WhatsApp fixo */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background-color: #25d366;
-      color: #fff;
-      border-radius: 50%;
-      font-size: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 8px rgba(0,0,0,0.2);
-      background-clip: padding-box;
-      z-index: 1000;
-      transition: transform 0.2s ease-in-out;
-      animation: pulse 2s infinite;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.2);
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
-
-    @media (max-width: 768px) {
-      .whatsapp-float {
-        box-shadow: none;
-      }
-    }
-
-    /* Ajuste altura completa para mobile */
-    .full-vh {
-      min-height: 100vh; /* fallback para desktop */
-    }
-
-    /* Logo Visibility animado */
     #logo-visibility {
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      transform-origin: left center;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
     .hidden-visibility {
       opacity: 0;
-      transform: translateX(30px) scale(0.8);
+      transform: translateX(20px);
     }
-
+    #logo-box {
+      transition: width 0.3s ease, height 0.3s ease;
+    }
+    .shrink-box {
+      width: 90px; /* cobre apenas o ON */
+      height: 60px;
+    }
   </style>
 </head>
-<body class="bg-black text-gray-200 font-sans">
+<body class="bg-black text-white">
 
-  <!-- Navbar -->
-  <header class="fixed w-full top-0 z-50 navbar">
-    <nav class="flex justify-between items-center px-6 md:px-20 py-4 text-white">
+  <!-- HEADER -->
+  <header class="fixed top-0 left-0 w-full bg-black z-50 shadow-md navbar transition-all duration-300">
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-20 py-4">
+      
       <!-- LOGO -->
       <a href="#" aria-label="On Visibility" class="flex items-center">
-        <svg width="220" height="60" viewBox="0 0 220 80" xmlns="http://www.w3.org/2000/svg">
+        <svg id="logo-svg" width="220" height="60" viewBox="0 0 420 100" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="onv-grad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#7C3AED"/>
               <stop offset="100%" stop-color="#EC4899"/>
             </linearGradient>
           </defs>
-          <rect x="5" y="10" width="210" height="60" rx="14" fill="none" stroke="url(#onv-grad)" stroke-width="4"/>
-          <text id="logo-on" x="35" y="50" font-size="28" font-weight="700" fill="url(#onv-grad)">ON</text>
-          <text id="logo-visibility" x="85" y="50" font-size="28" font-weight="700" fill="url(#onv-grad)">Visibility</text>
+          <!-- Caixa -->
+          <rect id="logo-box" x="10" y="20" width="200" height="70" rx="14" fill="none" stroke="url(#onv-grad)" stroke-width="4"/>
+          <!-- ON -->
+          <text id="logo-on" x="45" y="65" text-anchor="middle" font-size="32" font-weight="700" fill="url(#onv-grad)">ON</text>
+          <!-- Visibility -->
+          <text id="logo-visibility" x="140" y="65" text-anchor="start" font-size="32" font-weight="700" fill="url(#onv-grad)">Visibility</text>
         </svg>
       </a>
-      <ul class="hidden md:flex gap-6">
-        <li><a href="#sobre" class="hover:text-pink-400">Sobre</a></li>
-        <li><a href="#servicos" class="hover:text-pink-400">Serviços</a></li>
-        <li><a href="#espaco" class="hover:text-pink-400">Espaço</a></li>
-        <li><a href="#depoimentos" class="hover:text-pink-400">Depoimentos</a></li>
-      </ul>
-    </nav>
+
+      <!-- MENU -->
+      <nav class="hidden md:flex gap-6 text-white font-medium">
+        <a href="#home" class="hover:text-purple-400">Home</a>
+        <a href="#servicos" class="hover:text-purple-400">Serviços</a>
+        <a href="#contato" class="hover:text-purple-400">Contato</a>
+      </nav>
+
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section class="full-vh gradient-animated flex flex-col justify-center items-center text-white text-center" data-aos="fade-up">
-    <h1 class="text-5xl md:text-6xl font-extrabold drop-shadow-lg">On Visibility</h1>
-    <p class="mt-4 text-xl md:text-2xl">Transformamos seu negócio em presença digital de impacto, aumentando sua visibilidade e resultados.</p>
-    <a href="#sobre" class="mt-8 px-8 py-3 bg-black text-white font-semibold rounded-full shadow-lg hover:bg-gray-800 transition">Saiba Mais</a>
-  </section>
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="pt-32">
+    <section id="home" class="min-h-screen flex items-center justify-center px-6 md:px-20" data-aos="fade-up">
+      <h1 class="text-4xl md:text-6xl font-bold text-center">
+        Bem-vindo à <span class="text-purple-400">OnVisibility</span>
+      </h1>
+    </section>
 
-  <!-- Sobre -->
-  <section id="sobre" class="py-20 px-6 md:px-20" data-aos="fade-right">
-    <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Sobre Nós</h2>
-    <p class="max-w-3xl mx-auto text-center text-gray-300">Na On Visibility, ajudamos empresas e negócios a conquistarem presença digital de forma profissional e acessível.
-Criamos sites One Page modernos, rápidos e adaptados à identidade visual de cada cliente. Nossa missão é transformar sua ideia em um site que realmente gere resultados.</p>
-  </section>
-
-  <!-- Serviços -->
-  <section id="servicos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
-    <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">Nossos Serviços</h2>
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in">
-        <h3 class="text-xl font-semibold mb-3 text-purple-300">Criação de Sites One Page</h3>
-        <p class="text-gray-400">Desenvolvemos sites modernos e objetivos, perfeitos para destacar sua empresa em uma única página clara e atrativa. Design responsivo e adaptado à sua identidade visual.</p>
+    <section id="servicos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-right">
+      <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Nossos Serviços</h2>
+      <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto text-center">
+        <div class="p-6 rounded-xl bg-gray-800 shadow-lg hover:scale-105 transition">
+          <h3 class="text-xl font-bold mb-4">OnePage Personalizada</h3>
+          <p>Criamos sites objetivos que mostram tudo que seu cliente precisa saber.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-gray-800 shadow-lg hover:scale-105 transition">
+          <h3 class="text-xl font-bold mb-4">Do físico ao digital</h3>
+          <p>Transformamos sua presença offline em visibilidade online real.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-gray-800 shadow-lg hover:scale-105 transition">
+          <h3 class="text-xl font-bold mb-4">Visibilidade nas Redes</h3>
+          <p>Levamos seu negócio para onde os clientes estão: o digital.</p>
+        </div>
       </div>
-      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="200">
-        <h3 class="text-xl font-semibold mb-3 text-purple-300">Personalização para Negócios</h3>
-        <p class="text-gray-400">Cada site é feito sob medida para o seu negócio, com cores, estilos e conteúdos que refletem a essência da sua marca. Você recebe um site único, não um modelo pronto.</p>
+    </section>
+
+    <section id="contato" class="py-20 px-6 md:px-20" data-aos="fade-left">
+      <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Fale Conosco</h2>
+      <div class="max-w-2xl mx-auto text-center">
+        <p>Entre em contato e descubra como podemos aumentar a visibilidade do seu negócio.</p>
       </div>
-      <div class="p-6 bg-black rounded-2xl shadow-lg" data-aos="zoom-in" data-aos-delay="400">
-        <h3 class="text-xl font-semibold mb-3 text-purple-300">Otimização e Resultados</h3>
-        <p class="text-gray-400">Aplicamos técnicas de SEO básico e design estratégico para que seu site carregue rápido, apareça bem no Google e ajude você a conquistar novos clientes.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- Nosso Espaço -->
- <section id="OndeAtuamos" class="py-20 px-6 md:px-20" data-aos="fade-left">
-  <h2 class="text-3xl font-bold text-center mb-8 text-purple-400">Onde Atuamos</h2>
-  <div class="max-w-3xl mx-auto bg-gray-800 text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition" data-aos="zoom-in">
-    <h3 class="text-2xl font-semibold mb-4 text-center">Atendimento 100% Online</h3>
-    <p class="text-center text-lg">
-     Atendemos empresas de todo o Brasil 
-    </p>
-  </div>
-</section>
+  <!-- FOOTER -->
+  <footer class="bg-gray-950 py-6 text-center text-gray-400">
+    <p>© 2025 OnVisibility. Todos os direitos reservados.</p>
+  </footer>
 
-  <!-- Depoimentos -->
-  <section id="depoimentos" class="py-20 px-6 md:px-20 bg-gray-900" data-aos="fade-up">
-    <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">O que dizem nossos clientes</h2>
-    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-left">
-        <p class="italic text-gray-300">"Excelente atendimento, recomendo muito!"</p>
-        <footer class="mt-4 text-sm text-gray-500">–</footer>
-      </blockquote>
-      <blockquote class="p-6 bg-black rounded-xl shadow-lg" data-aos="flip-right" data-aos-delay="200">
-        <p class="italic text-gray-300">"Serviço de qualidade e profissionalismo!"</p>
-      <footer class="mt-4 text-sm text-gray-500">– </footer>
-    </blockquote>
-  </div>
-</section>
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
 
-<!-- Rodapé -->
-<footer class="py-6 text-center bg-black border-t border-gray-800 text-gray-500" data-aos="fade-in">
-  <p>&copy; 2025 On Visibility - Todos os direitos reservados</p>
-</footer>
+    // Efeito do logo
+    window.addEventListener("scroll", function() {
+      const visibilityText = document.getElementById("logo-visibility");
+      const logoBox = document.getElementById("logo-box");
 
-<!-- Botão WhatsApp fixo lateral direita -->
-<a href="https://wa.me/5511940122433" target="_blank" class="whatsapp-float">
-  <i class="fa-brands fa-whatsapp"></i>
-</a>
-
-<!-- Script Navbar Scroll -->
-<script>
-  window.addEventListener("scroll", function() {
-    const nav = document.querySelector(".navbar");
-    const visibilityText = document.getElementById("logo-visibility");
-    if (window.scrollY > 50) {
-      nav.classList.add("scrolled");
-      visibilityText.classList.add("hidden-visibility");
-    } else {
-      nav.classList.remove("scrolled");
-      visibilityText.classList.remove("hidden-visibility");
-    }
-  });
-</script>
-
-<!-- AOS Script -->
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
-</script>
-
-<script>
-  // Ajuste altura do Hero para mobile
-  function ajustarAlturaHero() {
-    const hero = document.querySelector('.full-vh');
-    if(hero){
-      hero.style.height = window.innerHeight + 'px';
-    }
-  }
-  window.addEventListener('load', ajustarAlturaHero);
-  window.addEventListener('resize', ajustarAlturaHero);
-</script>
-
+      if (window.scrollY > 50) {
+        visibilityText.classList.add("hidden-visibility");
+        logoBox.classList.add("shrink-box");
+      } else {
+        visibilityText.classList.remove("hidden-visibility");
+        logoBox.classList.remove("shrink-box");
+      }
+    });
+  </script>
 </body>
 </html>
